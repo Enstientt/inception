@@ -1,0 +1,63 @@
+version: '3'
+
+services:
+  nginx:
+    build: ./requirements/nginx/
+    container_name: nginx
+    image: nginx
+    ports:
+      - 443:443
+    env_file:
+      - .env
+    networks:
+      - incp_network
+    volumes:
+      - wdp_data:/var/www/html
+    depends_on:
+      - wordpress
+    restart: always
+  mariadb:
+    build: ./requirements/mariadb/
+    container_name: mariadb
+    image: mariadb
+    env_file:
+      - .env
+    networks:
+      - incp_network
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+
+  wordpress:
+    build: ./requirements/wordpress/
+    container_name: wordpress
+    image: wordpress
+    env_file:
+      - .env
+    networks:
+      - incp_network
+    volumes:
+      - wdp_data:/var/www/html
+    depends_on:
+      - mariadb
+    restart: always
+
+networks:
+  incp_network:
+    driver: bridge
+
+volumes:
+  wdp_data:
+    driver: local
+    driver_opts:          
+      o: bind
+      type: none
+      device: /home/zessadqu/data/wp
+  db_data:
+    driver: local
+    driver_opts:          
+      o: bind
+      type: none
+      device: /home/zessadqu/data/db
+    
+    
