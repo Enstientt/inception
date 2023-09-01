@@ -2,10 +2,10 @@
 FROM debian:bullseye
 
 # Install Nginx and OpenSSL
-RUN apt update
-RUN apt install nginx -y
+RUN apt-get update
+RUN apt-get install nginx -y
 RUN mkdir -p /etc/nginx/ssl
-RUN apt install openssl -y
+RUN apt-get install openssl -y
 RUN openssl req -x509 -newkey rsa:2048 -nodes \
     -out /etc/nginx/ssl/inception_crt.crt \
     -keyout /etc/nginx/ssl/inception_key.key \
@@ -15,7 +15,7 @@ RUN openssl req -x509 -newkey rsa:2048 -nodes \
 # COPY /conf/nginx.conf /etc/nginx/conf.d/nginx.conf
 # COPY /tools/generate_ssl_cert.sh /tools/generate_ssl_cert.sh
 # COPY /index.html /var/www/html/index.nginx-debian.html
-COPY ./conf/nginx.conf .
+COPY ./conf/nginx.conf /etc/nginx/sites-available/default
 
 # Expose ports for HTTP and HTTPS
 EXPOSE 443

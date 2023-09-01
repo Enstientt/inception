@@ -7,8 +7,15 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# Copy the .conf in the html directory
+COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/
+
+#Create the folder to enable php start
+
 # Copy the script into the container
 COPY ./tools/script.sh /
+
+
 
 # Make the script executable
 RUN chmod +x /script.sh
@@ -17,4 +24,4 @@ RUN chmod +x /script.sh
 EXPOSE 9000
 
 # Run the script when the container starts
-CMD ["/script.sh"]
+CMD ["./script.sh"]
