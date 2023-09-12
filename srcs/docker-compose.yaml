@@ -10,7 +10,7 @@ services:
     env_file:
       - .env
     networks:
-      - incp_network
+      - inception_network
     volumes:
       - wdp_data:/var/www/html
     depends_on:
@@ -23,7 +23,7 @@ services:
     env_file:
       - .env
     networks:
-      - incp_network
+      - inception_network
     volumes:
       - db_data:/var/lib/mysql
     restart: always
@@ -35,7 +35,7 @@ services:
     env_file:
       - .env
     networks:
-      - incp_network
+      - inception_network
     volumes:
       - wdp_data:/var/www/html
     depends_on:
@@ -43,7 +43,7 @@ services:
     restart: always
 
 networks:
-  incp_network:
+  inception_network:
     driver: bridge
 
 volumes:
@@ -52,12 +52,12 @@ volumes:
     driver_opts:          
       o: bind
       type: none
-      device: /home/zessadqu/data/wp
+      device: /Users/zessadqu/data/wp
   db_data:
     driver: local
     driver_opts:          
       o: bind
       type: none
-      device: /home/zessadqu/data/db
+      device: /Users/zessadqu/data/db
     
     

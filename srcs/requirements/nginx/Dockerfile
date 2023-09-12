@@ -11,10 +11,6 @@ RUN openssl req -x509 -newkey rsa:2048 -nodes \
     -keyout /etc/nginx/ssl/inception_key.key \
     -subj "/C=MA/ST=IDF/L=KHOURIBGA/O=42/OU=42/CN=zessadqu.42.fr/UID=zessadqu"
 
-# Copy Nginx configuration and SSL certificate generation script
-# COPY /conf/nginx.conf /etc/nginx/conf.d/nginx.conf
-# COPY /tools/generate_ssl_cert.sh /tools/generate_ssl_cert.sh
-# COPY /index.html /var/www/html/index.nginx-debian.html
 COPY ./conf/nginx.conf /etc/nginx/sites-available/default
 
 # Expose ports for HTTP and HTTPS

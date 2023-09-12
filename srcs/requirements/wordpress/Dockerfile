@@ -8,11 +8,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy the .conf in the html directory
-COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/
+# COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/
 
-#Create the folder to enable php start
-
-# Copy the script into the container
 COPY ./tools/script.sh /
 
 
